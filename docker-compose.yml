@@ -1,0 +1,5 @@
+flow-price-stat:
+  restart: always
+  image: flow-price-stat
+  volumes:
+    - ${PWD}/.env:/app/.env
