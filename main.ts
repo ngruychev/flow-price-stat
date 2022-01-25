@@ -17,7 +17,7 @@ function getEnv(name: string): string | undefined {
 function unwrap<T>(value?: T, message?: string): T {
   const errMessage = message ?? "did not expect value";
   if (!value) {
-    throw new Error(message);
+    throw new Error(errMessage);
   }
   return value;
 }
@@ -67,15 +67,21 @@ async function getPrice(): Promise<number> {
 }
 
 async function updateChannel(price: number) {
-  await bot.helpers.editChannel(statChannelId, {
+  return await bot.helpers.editChannel(statChannelId, {
     name: `${statNamePrefix}${price}${statNameSuffix}`,
   });
 }
 
 const _updateIntervalId = setInterval(async () => {
-  const price = await getPrice();
-  await updateChannel(price);
-  console.log(
-    `Updated channel ${statChannelId} with text "${statNamePrefix}${price}${statNameSuffix}"`,
-  );
+  try {
+    console.log("Running interval");
+    const price = await getPrice();
+    console.log(`Fetched ${tickerSymbol} price - ${price}`);
+    await updateChannel(price);
+    console.log(
+      `Updated channel ${statChannelId} with text "${statNamePrefix}${price}${statNameSuffix}"`,
+    );
+  } catch (e) {
+      console.error(e);
+  }
 }, updateInterval);
