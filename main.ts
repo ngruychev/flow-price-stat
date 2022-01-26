@@ -33,7 +33,7 @@ const statChannelId = BigInt(unwrapEnv("STAT_CHANNEL_ID"));
 const tickerSymbol = getEnv("TICKER_SYMBOL") ?? "FLOWUSDT";
 const statNamePrefix = getEnv("STAT_NAME_PREFIX") ?? "FLOW price: $";
 const statNameSuffix = getEnv("STAT_NAME_SUFFIX") ?? " USD";
-const updateInterval = parseInt(getEnv("UPDATE_INTERVAL") ?? "60", 10) * 1000;
+const updateInterval = parseInt(getEnv("UPDATE_INTERVAL") ?? "600", 10) * 1000;
 
 const baseBot = createBot({
   token,
