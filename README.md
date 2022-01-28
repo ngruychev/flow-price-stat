@@ -6,7 +6,7 @@ a la Statbot
 ## Building
 
 ```sh
-docker build . -t flow-price-stat
+docker-compose build
 ```
 
 ## Running
